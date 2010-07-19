@@ -2,7 +2,10 @@ import Test.QuickCheck
 
 prop_empty_sum_is_zero = add "" == 0
 
-prop_sum_of_single_number_is_itself = add "2,2" == 4
+prop_sum_two_numbers a b = add (show a ++ "," ++ show b) == a + b
 
 add "" = 0
-add xs = 4
+add xs = read a + read b
+  where
+    (a, b) = (a', tail b')
+    (a', b') = break (== ',') xs
