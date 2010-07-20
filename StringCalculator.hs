@@ -11,8 +11,9 @@ prop_sum_n_numbers numbers = add (intercalate "," (map show numbers)) == sum num
 
 add :: String -> Integer
 add "" = 0
-add xs | any (== ',') xs = read a + read b
-       | otherwise  = read xs
-  where
-    (a, b) = (a', tail b')
-    (a', b') = break (== ',') xs
+add xs = sum (extractNumbers xs) where
+    extractNumbers xs = map read (splitBy (== ',') xs)
+
+splitBy _ [] = []
+splitBy f list = first : splitBy f (dropWhile f rest) where
+  (first, rest) = break f list
