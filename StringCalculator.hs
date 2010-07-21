@@ -1,7 +1,8 @@
 import Test.QuickCheck
 import Data.List
 
-prop_sum_n_numbers numbers = add (intercalate "," (map show numbers)) == sum numbers
+prop_sum_n_numbers numbers = add input == sum numbers where
+  input = (intercalate "," (map show numbers))
 
 add :: String -> Integer
 add xs = sum (extractNumbers xs) where
